@@ -1,52 +1,63 @@
 import React from "react";
 import { useState, useSelector } from "react";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 import styled from "styled-components";
 import todos from "../redux/modules/todos";
 import { addTodo } from "../redux/modules/todos";
 
 const Form = () => {
-  const [todo, setTodo] = useState([
-    {
-      id: 0,
-      title: "",
-      content: "",
-      isDone: false,
-    },
-  ]);
-  const [content, setContent] = useState("");
-
+  const [todo, setTodo] = useState({
+    id: 0,
+    title: "",
+    content: "",
+    isDone: false,
+  });
   const dispatch = useDispatch();
 
   const onChangeHandler = (e) => {
+    const { name, value } = e.target;
     setTodo({
-      ...todo,
-      [e.target.name]: e.target.value,
+      // ...todo,
+      id: Date.now(),
+      isDone: false,
+      [name]: value,
+      // [e.target.name]: e.target.value,
     });
   };
+
+  useEffect(() => {
+    console.log(todo);
+  }, [todo]);
 
   const onSubmitHandler = (event) => {
     // console.log("투두리스트 보게", todo);
     event.preventDefault();
-    if (todo.title === "") return;
+    // if (todo.title === "") return;
 
-    dispatch(addTodo({ ...todo }));
+    dispatch(addTodo(todo));
     setTodo({
       id: 0,
       title: "",
       content: "",
       isDone: false,
     });
-    console.log("잘찍히니", todo);
+    // console.log("잘찍히니", todo);
   };
 
   return (
     <STForm>
       <STInputContainer>
         <STInputLabel>제목</STInputLabel>
-        <STInput type='text' name='title' onChange={onChangeHandler}></STInput>
+        <STInput
+          type='text'
+          name='title'
+          value={todo.title}
+          onChange={onChangeHandler}
+        ></STInput>
         <STInputLabel>내용</STInputLabel>
         <STInput
+          value={todo.content}
           type='text'
           name='content'
           onChange={onChangeHandler}
