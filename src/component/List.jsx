@@ -6,15 +6,18 @@ import { deleteTodo } from "../redux/modules/todos";
 
 const List = () => {
   const dispatch = useDispatch();
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  // const [title, setTitle] = useState("");
+  // const [content, setContent] = useState("");
   const todos = useSelector((state) => state.todos.todos);
+
   const onDeleteHandler = (id) => {
     dispatch(deleteTodo(id));
+    console.log("결과값 줘", id);
   };
   // useEffect(() => {
   //   console.log(todos);
   // }, [todos]);
+
   return (
     <STList>
       <STListLeft>
@@ -25,13 +28,16 @@ const List = () => {
           if (item.isDone === false) {
             return (
               <STTodoItemContainer>
-                <STTodoItem key={todos.id}>
+                <STTodoItem key={item.id}>
                   <div>
                     <h2>{item.title}</h2>
                     <h3>{item.content}</h3>
                   </div>
                   <STFooter>
-                    <STButton borderColor='red' onClick={onDeleteHandler}>
+                    <STButton
+                      borderColor='red'
+                      onClick={() => onDeleteHandler(item.id)}
+                    >
                       삭제하기
                     </STButton>
                     <STButton borderColor='green'>완료</STButton>
@@ -56,7 +62,12 @@ const List = () => {
                     <h3>{item.content}</h3>
                   </div>
                   <STFooter>
-                    <STButton borderColor='red'>삭제하기</STButton>
+                    <STButton
+                      borderColor='red'
+                      onClick={() => onDeleteHandler(item.id)}
+                    >
+                      삭제하기
+                    </STButton>
                     <STButton borderColor='green'>완료</STButton>
                   </STFooter>
                 </STTodoItem>

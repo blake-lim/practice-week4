@@ -16,11 +16,12 @@ const initialState = {
 };
 
 export const addTodo = (payload) => {
-  console.log("페이로드", payload);
+  console.log("페이로드add", payload);
   return { type: ADD_TODOLIST, payload };
 };
 
 export const deleteTodo = (payload) => {
+  console.log("페이로드", payload);
   return { type: DELETE_TODOLIST, payload };
 };
 
@@ -37,7 +38,9 @@ function todos(state = initialState, action) {
     case DELETE_TODOLIST:
       return {
         ...state,
-        todos: state.todos.filter((todo) => todo.id !== action.payload),
+        todos: state.todos.filter(
+          (todos) => todos.id !== parseInt(action.payload)
+        ),
       };
     default: // need this for default case
       return state;
