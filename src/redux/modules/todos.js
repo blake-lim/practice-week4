@@ -1,19 +1,20 @@
 const initialState = {
   todos: [
     {
-      id: Date.now(),
+      id: 0,
       title: "React",
       content: "히히하하호호",
       isDone: false,
     },
     {
-      id: Date.now(),
+      id: 1,
       title: "Redux",
       content: "후후히히허허",
       isDone: true,
     },
   ],
 };
+
 export const addTodo = (payload) => {
   console.log("페이로드", payload);
   return { type: ADD_TODOLIST, payload };

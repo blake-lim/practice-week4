@@ -103,7 +103,7 @@ const STTodoItem = styled.div`
 
 const STList = styled.div`
   width: 100%;
-  height: 500px;
+  height: 1000px;
   border: 1px solid #003458;
 `;
 

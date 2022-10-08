@@ -8,17 +8,17 @@ import { addTodo } from "../redux/modules/todos";
 
 const Form = () => {
   const [todo, setTodo] = useState({
-    id: 0,
-    title: "",
-    content: "",
-    isDone: false,
+    // id: 3,
+    // title: "",
+    // content: "",
+    // isDone: false,
   });
   const dispatch = useDispatch();
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
     setTodo({
-      // ...todo,
+      ...todo,
       id: Date.now(),
       isDone: false,
       [name]: value,
@@ -26,9 +26,9 @@ const Form = () => {
     });
   };
 
-  useEffect(() => {
-    console.log(todo);
-  }, [todo]);
+  // useEffect(() => {
+  //   console.log(todo);
+  // }, [todo]);
 
   const onSubmitHandler = (event) => {
     // console.log("투두리스트 보게", todo);
@@ -36,13 +36,13 @@ const Form = () => {
     // if (todo.title === "") return;
 
     dispatch(addTodo(todo));
-    setTodo({
-      id: 0,
-      title: "",
-      content: "",
-      isDone: false,
-    });
-    // console.log("잘찍히니", todo);
+    // setTodo({
+    //   id: 3,
+    //   title: "",
+    //   content: "",
+    //   isDone: false,
+    // });
+    console.log("잘찍히니", todo);
   };
 
   return (
