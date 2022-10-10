@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import todos from "../redux/modules/todos";
 import { deleteTodo } from "../redux/modules/todos";
+import { changeTodo } from "../redux/modules/todos";
 
 const List = () => {
   const dispatch = useDispatch();
@@ -12,11 +13,14 @@ const List = () => {
 
   const onDeleteHandler = (id) => {
     dispatch(deleteTodo(id));
-    console.log("결과값 줘", id);
   };
   // useEffect(() => {
   //   console.log(todos);
   // }, [todos]);
+
+  const onChangeHandler = (id) => {
+    dispatch(changeTodo(Number(id)));
+  };
 
   return (
     <STList>
@@ -31,16 +35,21 @@ const List = () => {
                 <STTodoItem key={item.id}>
                   <div>
                     <h2>{item.title}</h2>
-                    <h3>{item.content}</h3>
+                    <p>{item.content}</p>
                   </div>
                   <STFooter>
                     <STButton
                       borderColor='red'
                       onClick={() => onDeleteHandler(item.id)}
                     >
-                      삭제하기
+                      삭제
                     </STButton>
-                    <STButton borderColor='green'>완료</STButton>
+                    <STButton
+                      borderColor='green'
+                      onClick={() => onChangeHandler(item.id)}
+                    >
+                      완료
+                    </STButton>
                   </STFooter>
                 </STTodoItem>
               </STTodoItemContainer>
@@ -59,16 +68,21 @@ const List = () => {
                 <STTodoItem key={todos.id}>
                   <div>
                     <h2>{item.title}</h2>
-                    <h3>{item.content}</h3>
+                    <p>{item.content}</p>
                   </div>
                   <STFooter>
                     <STButton
                       borderColor='red'
                       onClick={() => onDeleteHandler(item.id)}
                     >
-                      삭제하기
+                      삭제
                     </STButton>
-                    <STButton borderColor='green'>완료</STButton>
+                    <STButton
+                      borderColor='blue'
+                      onClick={() => onChangeHandler(item.id)}
+                    >
+                      취소
+                    </STButton>
                   </STFooter>
                 </STTodoItem>
               </STTodoItemContainer>

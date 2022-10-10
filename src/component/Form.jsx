@@ -31,9 +31,9 @@ const Form = () => {
   // }, [todo]);
 
   const onSubmitHandler = (event) => {
-    // console.log("투두리스트 보게", todo);
+    console.log("투두리스트 보게", todo);
     event.preventDefault();
-    // if (todo.title === "") return;
+    if (todo.title === "") return;
 
     dispatch(addTodo(todo));
     // setTodo({
@@ -42,7 +42,6 @@ const Form = () => {
     //   content: "",
     //   isDone: false,
     // });
-    console.log("잘찍히니", todo);
   };
 
   return (
