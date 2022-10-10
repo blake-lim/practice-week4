@@ -34,6 +34,7 @@ const List = () => {
               <STTodoItemContainer>
                 <STTodoItem key={item.id}>
                   <div>
+                    <StDetail href={"/detail/"}>상세보기</StDetail>
                     <h2>{item.title}</h2>
                     <p>{item.content}</p>
                   </div>
@@ -67,6 +68,7 @@ const List = () => {
               <STTodoItemContainer>
                 <STTodoItem key={todos.id}>
                   <div>
+                    <StDetail href={"/detail/"}>상세보기</StDetail>
                     <h2>{item.title}</h2>
                     <p>{item.content}</p>
                   </div>
@@ -93,6 +95,10 @@ const List = () => {
     </STList>
   );
 };
+
+const StDetail = styled.a`
+  text-decoration: none;
+`;
 
 const STButton = styled.button`
   border: 1px solid ${(props) => props.borderColor};

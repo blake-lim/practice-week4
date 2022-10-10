@@ -29,9 +29,17 @@ export const changeTodo = (payload) => {
   return { type: CHANGE_TODOLIST, id: payload };
 };
 
+export const getDetail = (id) => {
+  return {
+    type: GET_DETAIL,
+    id: id,
+  };
+};
+
 const ADD_TODOLIST = "ADD_TODOLIST";
 const DELETE_TODOLIST = "DELETE_TODOLIST";
 const CHANGE_TODOLIST = "CHANGE_TODOLIST";
+const GET_DETAIL = "GET_DETAIL";
 
 function todos(state = initialState, action) {
   switch (action.type) {
@@ -56,6 +64,11 @@ function todos(state = initialState, action) {
         ...state,
         todos: [...state.todos],
       };
+    case GET_DETAIL:
+      const [selTodo] = state.todos.filter((item) => {
+        return item.id === action.id;
+      });
+      return { ...state, todo: selTodo };
     default: // need this for default case
       return state;
   }
