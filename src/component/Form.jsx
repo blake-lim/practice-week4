@@ -36,12 +36,12 @@ const Form = () => {
     if (todo.title === "") return;
 
     dispatch(addTodo(todo));
-    // setTodo({
-    //   id: 3,
-    //   title: "",
-    //   content: "",
-    //   isDone: false,
-    // });
+    setTodo({
+      id: "",
+      title: "",
+      content: "",
+      isDone: false,
+    });
   };
 
   return (

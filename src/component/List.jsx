@@ -31,7 +31,7 @@ const List = () => {
         {todos.map((item) => {
           if (item.isDone === false) {
             return (
-              <STTodoItemContainer>
+              <STTodoItemContainer backgroundColor='white'>
                 <STTodoItem key={item.id}>
                   <div>
                     <StDetail href={"/detail/"}>상세보기</StDetail>
@@ -65,7 +65,7 @@ const List = () => {
         {todos.map((item) => {
           if (item.isDone === true) {
             return (
-              <STTodoItemContainer>
+              <STTodoItemContainer backgroundColor='beige'>
                 <STTodoItem key={todos.id}>
                   <div>
                     <StDetail href={"/detail/"}>상세보기</StDetail>
@@ -118,9 +118,10 @@ const STFooter = styled.footer`
 `;
 
 const STTodoItemContainer = styled.div`
+  background-color: ${(props) => props.backgroundColor};
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 12px; ;
 `;
 
 const STTodoItem = styled.div`
@@ -130,6 +131,7 @@ const STTodoItem = styled.div`
   border-radius: 12px;
   padding: 12px 24px 24px;
   margin: auto;
+  margin-top: 15px;
 `;
 
 const STList = styled.div`
