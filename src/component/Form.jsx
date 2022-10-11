@@ -31,11 +31,16 @@ const Form = () => {
   // }, [todo]);
 
   const onSubmitHandler = (event) => {
-    console.log("투두리스트 보게", todo);
     event.preventDefault();
-    if (todo.title === "") return;
+    // 양식 미작성 시, alert 표시
+    console.log(todo.content);
+    if (todo.title || todo.content === "") {
+      alert("양식을 작성하여 제출하십시오.");
+      return;
+    }
 
     dispatch(addTodo(todo));
+    // submit후 빈칸 유지를 위해 공객체 생성
     setTodo({
       id: "",
       title: "",
