@@ -17,14 +17,16 @@ const List = () => {
     content: "",
   });
 
-  const [editValue, setEditValue] = useState("none");
-
+  // 토글이 열고 닫힐때 화면 리랜더링을 위한 useState 추가
+  const [openToggle, setOpenToggle] = useState(false);
+  // useEffect의 두번째 인자에 openToggle을 넣어
+  // openToggle의 값이 변할때마다 화면을 리랜더링 하도록 함
+  useEffect(() => {
+    setOpenToggle(!openToggle);
+  }, [openToggle]);
   const onDeleteHandler = (id) => {
     dispatch(deleteTodo(id));
   };
-  // useEffect(() => {
-  //   console.log(todos);
-  // }, [todos]);
 
   const onChangeHandler = (id) => {
     dispatch(changeTodo(Number(id)));
@@ -38,9 +40,9 @@ const List = () => {
   };
 
   const openEdit = (id) => {
-    if (editValue == "none") {
-      setEditValue("block");
-    }
+    // if (editValue == “none”) {
+    //   setEditValue(“block”);
+    // }
     const [newTodoList] = todos.filter((item, i, arr) => {
       // if (item.id == id) {
       //   arr[i].title = edit.title;
@@ -55,18 +57,19 @@ const List = () => {
       // }
       return item.id !== id;
     });
-    console.log(restTodo, "ssssss");
+    console.log(restTodo);
     newTodoList.isEdit = true;
     restTodo.map((item, i, arr) => {
       arr[i].isEdit = false;
     });
+    // 토글이 오픈될때 toggle값을 바꿈
+    setOpenToggle(!openToggle);
   };
-
   const submitEdit = (id) => {
     //none을 block으로 바꾸어줌
-    if (editValue == "none") {
-      setEditValue("block");
-    }
+    // if (editValue == “none”) {
+    //   setEditValue(“block”);
+    // }
     const [newTodoList] = todos.filter((item, i, arr) => {
       // if (item.id == id) {
       //   arr[i].title = edit.title;
@@ -143,9 +146,8 @@ const List = () => {
                       ></STModifyitem>
                     </STModifyContainer>
                   ) : (
-                    <div>ㅋㅋ</div>
+                    <div></div>
                   )}
-                  {item.isEdit === false && <div></div>}
                 </STTodoItem>
               </STTodoItemContainer>
             );
