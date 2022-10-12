@@ -34,11 +34,15 @@ const Form = () => {
     event.preventDefault();
     // 양식 미작성 시, alert 표시
     console.log(todo.content);
-    if (todo.title || todo.content === "") {
+    if (
+      todo.title == undefined ||
+      todo.content == undefined ||
+      todo.content == "" ||
+      todo.title == ""
+    ) {
       alert("양식을 작성하여 제출하십시오.");
       return;
     }
-
     dispatch(addTodo(todo));
     // submit후 빈칸 유지를 위해 공객체 생성
     setTodo({

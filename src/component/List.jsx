@@ -4,12 +4,20 @@ import { useDispatch, useSelector } from "react-redux";
 import todos from "../redux/modules/todos";
 import { deleteTodo } from "../redux/modules/todos";
 import { changeTodo } from "../redux/modules/todos";
+import { eDiT } from "../redux/modules/todos";
+import { Link } from "react-router-dom";
 
 const List = () => {
   const dispatch = useDispatch();
   // const [title, setTitle] = useState("");
   // const [content, setContent] = useState("");
   const todos = useSelector((state) => state.todos.todos);
+  const [edit, setEdit] = useState({
+    title: "",
+    content: "",
+  });
+
+  const [editValue, setEditValue] = useState("none");
 
   const onDeleteHandler = (id) => {
     dispatch(deleteTodo(id));
@@ -20,6 +28,64 @@ const List = () => {
 
   const onChangeHandler = (id) => {
     dispatch(changeTodo(Number(id)));
+  };
+
+  const onEditHandler = (e) => {
+    setEdit({
+      ...edit,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const openEdit = (id) => {
+    if (editValue == "none") {
+      setEditValue("block");
+    }
+    const [newTodoList] = todos.filter((item, i, arr) => {
+      // if (item.id == id) {
+      //   arr[i].title = edit.title;
+      //   arr[i].content = edit.content;
+      // }
+      return item.id == id;
+    });
+    const restTodo = todos.filter((item, i, arr) => {
+      // if (item.id == id) {
+      //   arr[i].title = edit.title;
+      //   arr[i].content = edit.content;
+      // }
+      return item.id !== id;
+    });
+    console.log(restTodo, "ssssss");
+    newTodoList.isEdit = true;
+    restTodo.map((item, i, arr) => {
+      arr[i].isEdit = false;
+    });
+  };
+
+  const submitEdit = (id) => {
+    //none을 block으로 바꾸어줌
+    if (editValue == "none") {
+      setEditValue("block");
+    }
+    const [newTodoList] = todos.filter((item, i, arr) => {
+      // if (item.id == id) {
+      //   arr[i].title = edit.title;
+      //   arr[i].content = edit.content;
+      // }
+      return item.id == id;
+    });
+
+    //수정버튼을 닫았으니, 뉴튜두리스트 방금 찍은 아이디에 투두리스트니까
+    //여기다가 추가를 해줘야한다 newTodoList.isEdit값을 추가해줘야함
+    newTodoList.isEdit = false;
+    newTodoList.title = edit.title;
+    newTodoList.content = edit.content;
+    console.log("이거", newTodoList);
+
+    dispatch(eDiT(newTodoList));
+    // if (editValue == "block") {
+    //   setEditValue("none");
+    // }
   };
 
   return (
@@ -52,6 +118,34 @@ const List = () => {
                       완료
                     </STButton>
                   </STFooter>
+                  <button
+                    onClick={() => {
+                      openEdit(item.id);
+                    }}
+                  >
+                    수정버튼
+                  </button>
+                  {/* ⭐️요부분 굉장히 많이 씀, 어떤 버튼을 토글할때 이렇게 씀 */}
+                  {item.isEdit === true ? (
+                    <STModifyContainer>
+                      <button onClick={() => submitEdit(item.id)}>
+                        수정완료
+                      </button>
+                      <STModifyitem
+                        name='title'
+                        placeholder='제목을 입력하세요'
+                        onChange={onEditHandler}
+                      ></STModifyitem>
+                      <STModifyitem
+                        name='content'
+                        placeholder='내용을 입력하세요'
+                        onChange={onEditHandler}
+                      ></STModifyitem>
+                    </STModifyContainer>
+                  ) : (
+                    <div>ㅋㅋ</div>
+                  )}
+                  {item.isEdit === false && <div></div>}
                 </STTodoItem>
               </STTodoItemContainer>
             );
@@ -69,6 +163,7 @@ const List = () => {
                 <STTodoItem key={todos.id}>
                   <div>
                     <StDetail href={"/detail/"}>상세보기</StDetail>
+                    {/* a링크 바꿔  -> nav로*/}
                     <h2>{item.title}</h2>
                     <p>{item.content}</p>
                   </div>
@@ -95,6 +190,22 @@ const List = () => {
     </STList>
   );
 };
+
+const STModifyContainer = styled.div`
+  padding: 32px 0 32px 30px;
+  /* display: ${(props) => props.display}; */
+`;
+
+const STModifyitem = styled.input`
+  line-height: 27px;
+  float: left;
+  height: 27px;
+  padding: 0 0 0 7px;
+  vertical-align: top;
+  color: #333;
+  border: 1px solid #ccc;
+  opacity: 1;
+`;
 
 const StDetail = styled.a`
   text-decoration: none;

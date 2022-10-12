@@ -57,6 +57,7 @@ const StDetailMain = styled.main`
 
 const Detail = () => {
   const [selTodo] = useSelector((state) => state.todos.todos);
+  console.log(selTodo);
   const { id } = useParams();
   const dispatch = useDispatch();
 

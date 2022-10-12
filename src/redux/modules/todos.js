@@ -1,3 +1,5 @@
+import react from "react-dom/test-utils";
+
 const initialState = {
   todos: [
     {
@@ -13,6 +15,12 @@ const initialState = {
       isDone: true,
     },
   ],
+  todo: {
+    id: 1,
+    title: "Redux",
+    content: "리덕스는 더 어려워",
+    isDone: true,
+  },
 };
 
 export const addTodo = (payload) => {
@@ -36,10 +44,22 @@ export const getDetail = (id) => {
   };
 };
 
+export const eDiT = (payload) => {
+  console.log("페이로드임", payload);
+  return {
+    type: EDIT,
+    id: payload.id,
+    title: payload.title,
+    content: payload.content,
+    isDone: payload.isDone,
+  };
+};
+
 const ADD_TODOLIST = "ADD_TODOLIST";
 const DELETE_TODOLIST = "DELETE_TODOLIST";
 const CHANGE_TODOLIST = "CHANGE_TODOLIST";
 const GET_DETAIL = "GET_DETAIL";
+const EDIT = "EDIT";
 
 function todos(state = initialState, action) {
   switch (action.type) {
@@ -69,6 +89,19 @@ function todos(state = initialState, action) {
         return item.id === action.id;
       });
       return { ...state, todo: selTodo };
+
+    case EDIT:
+      state.todos.map((item, i, arr) => {
+        if (item.id == action.id) {
+          arr[i].title = action.title;
+          arr[i].content = action.content;
+        }
+      });
+      return {
+        ...state,
+        todos: [...state.todos],
+      };
+
     default: // need this for default case
       return state;
   }
