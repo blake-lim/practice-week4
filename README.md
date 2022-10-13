@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# Hanghae99 9기 C반 9조
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br>프로젝트 주소 : https://hanghae-react-2nd-week.vercel.app/
 
-## Available Scripts
+## <br></br>
 
-In the project directory, you can run:
+<img width="1473" alt="스크린샷 2022-10-13 16 40 08" src="https://user-images.githubusercontent.com/86904667/195533021-59888fcd-3dd4-4c1e-af1e-e5f1d6a63d6c.png">
 
-### `yarn start`
+<h1>HangHae99 Bootamp task(week3)  : Todo List with React-Redux</b></h1>
+<h3>Technical Stack</h3>
+<h2>HTML / CSS / JavaScript / React / Redux / git / gitHub / Vercel</h2>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Implementation Features
 
-### `yarn test`
+<strong>Feature 1:</strong> TodoList registration using input and button
+Manage two inputs at once to receive a value
+Capture and save the input value through the onChangeHandler
+Transfer and register the value by changing the state value through the action detected reducer sent by dispatch at the time of submission
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<strong>Feature 2:</strong> Delete the created TodoList
+Using filter, compare id and todoListid that entered the parameter and delete values that are not the same
+Change state value through reducer
 
-### `yarn build`
+<strong>Feature 3:</strong> Complete and cancel TodoList
+Register and cancel after comparing with item.id and parameter id using map method
+Filter the value received by redux and turn it back to the map to divide Working / Done according to the isDone value
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<strong>Feature 4:</strong> Implementing a detailed page through react-router-dom
+index.js, Router.jsx, app.js preset page movement settings
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Separate Detail.jsx file from Home.jsx to implement detailed page
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Moving Home Using Link Tags
 
-### `yarn eject`
+Use Params to get the id value to move the page to /:id without loading the page
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+After that, import the todos value from Detail.jsx to useSelector without using the reader and implement the detailed page contents using the find method
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Reasons for dividing components
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Using Ducks Pattern to Divide<br/>
+<Strong>1. Component</Strong><br/>
+AddForm.jsx : Centralize input and add button management
+TodoListContainer.jsx : Unification of TodoList in general (frame, delete and complete/cancel, add list)
+I considered dividing the components, but I think it would be easier to manage them in a single unit, so I manage them together
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Header.jsx : For Header (Title)
+Layout.jsx : Match layout conditions
 
-## Learn More
+<Strong>2. Pages</Strong><br/>
+Home.jsx : Design considering page movement instead of App.js (App.js can only load Router)
+Detail.jsx : Detail page. It's a pattern managed separately by url, so it's managed separately
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<Strong>3. redux & Router</Strong><br/>
+modules>todos.js: Patterns for centralizing action creator, reducer management
+shared>Router.jsx : Pattern management by setting for moving the detailed page of Home according to the reaction-router-dom method
