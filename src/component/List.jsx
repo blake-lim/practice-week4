@@ -103,7 +103,14 @@ const List = () => {
               <STTodoItemContainer backgroundColor='white'>
                 <STTodoItem key={item.id}>
                   <div>
-                    <StDetail href={"/detail/"}>상세보기</StDetail>
+                    <Link
+                      to={`/${item.id}`}
+                      style={{ textDecoration: "none" }}
+                      key={item.id}
+                    >
+                      {" "}
+                      상세보기{" "}
+                    </Link>
                     <h2>{item.title}</h2>
                     <p>{item.content}</p>
                   </div>
@@ -164,7 +171,14 @@ const List = () => {
               <STTodoItemContainer backgroundColor='beige'>
                 <STTodoItem key={todos.id}>
                   <div>
-                    <StDetail href={"/detail/"}>상세보기</StDetail>
+                    <Link
+                      to={`/${item.id}`}
+                      style={{ textDecoration: "none" }}
+                      key={item.id}
+                    >
+                      {" "}
+                      상세보기{" "}
+                    </Link>
                     {/* a링크 바꿔  -> nav로*/}
                     <h2>{item.title}</h2>
                     <p>{item.content}</p>

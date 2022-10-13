@@ -15,7 +15,7 @@ const Router = () => {
 						element는 해당 주소로 이동했을 때 보여주고자 하는 컴포넌트를 넣어줍니다.
 				 */}
         <Route path='/' element={<Home />} />
-        <Route path='/detail' element={<Detail />} />
+        <Route path='/:id' element={<Detail />} />
       </Routes>
     </BrowserRouter>
   );

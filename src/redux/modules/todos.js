@@ -85,9 +85,17 @@ function todos(state = initialState, action) {
         todos: [...state.todos],
       };
     case GET_DETAIL:
+      // return {
+      //   ...state,
+      //   todo: state.todos.find((todo) => {
+      //     return todo.id === action.payload;
+      //   }),
+      // };
+      console.log("겟디테일");
       const [selTodo] = state.todos.filter((item) => {
         return item.id === action.id;
       });
+      console.log("겟디테일", selTodo);
       return { ...state, todo: selTodo };
 
     case EDIT:
