@@ -22,7 +22,7 @@ const List = () => {
   // useEffect의 두번째 인자에 openToggle을 넣어
   // openToggle의 값이 변할때마다 화면을 리랜더링 하도록 함
   useEffect(() => {
-    setOpenToggle(!openToggle);
+    setOpenToggle(false);
   }, [openToggle]);
   const onDeleteHandler = (id) => {
     dispatch(deleteTodo(id));
